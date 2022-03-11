@@ -3,13 +3,9 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 import 'firebase/database';
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
+// Firebase configuration
+var firebaseConfig = {
       apiKey: 'AIzaSyDYFvsTSQtRs9zFDqUpKS9KF2OZksaxKvE',
       authDomain: 'whatsapp-clone-2050.firebaseapp.com',
       projectId: 'whatsapp-clone-2050',
@@ -19,13 +15,14 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 const storage = firebase.storage().ref('images');
 const audioStorage = firebase.storage().ref('audios');
-const createTimestamp = firebase.firestore.FieldValue.servrTimestamp;
-const servrTimestamp = firebase.database.ServerValue.TIMESTAMP;
+const createTimestamp = firebase.firestore.FieldValue.serverTimestamp;
+const serverTimestamp = firebase.database.ServerValue.TIMESTAMP;
 
-export { db, auth, provider, storage, audioStorage, createTimestamp, servrTimestamp };
+export  { db, auth, provider, storage, audioStorage, createTimestamp, serverTimestamp };
