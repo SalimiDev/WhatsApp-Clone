@@ -1,0 +1,55 @@
+.sidebar__chatContainer::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.sidebar__chatContainer > h2 {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  font-weight: 700;
+  color: black;
+  transition: opacity 400ms;
+}
+
+.sidebar__loader {
+  background-color: transparent !important;
+  height: 65% !important;
+}
+
+.sidebar__loader .MuiCircularProgress-svg {
+  transform: scale(2) !important;
+}
+
+.no_result {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: noresult-fade-in 400ms forwards;
+  padding: 1em;
+}
+
+.no_result > div > .MuiSvgIcon-root:nth-child(1) {
+  transform: scale(3);
+}
+
+.cancel_root {
+  background-color: #ffffff;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+
+.no_result > div {
+  transform: scale(1.8);
+}
+
+.no_result > div > div {
+  transform: translate(-60%, -90%);
+}
+
