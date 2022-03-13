@@ -4,10 +4,23 @@ import { Avatar, IconButton } from '@material-ui/core';
 import { SearchOutlined, Home, Message, PeopleAlt } from '@material-ui/icons';
 import { ExitToApp } from '@material-ui/icons';
 import { auth } from '../firebase';
-import { NavLink } from 'react-router-dom';
+import { Routes, Route, NavLink } from 'react-router-dom';
+//Components
+import SidebarList from './SidebarList';
+//hooks
+import useRooms from '../hooks/useRooms';
+import useUsers from '../hooks/useUsers';
+import useChats from '../hooks/useChats';
 
 const Sidebar = ({ user, page }) => {
+    //hooks
+    const rooms = useRooms();
+    const users = useUsers(user);
+    const chats = useChats(user);
+    //state
     const [menu, setMenu] = useState(1);
+    const [searchResults, setSearchResults] = useState([]);
+    //SignOut handling
     const SignOutOnClick = () => {
         auth.signOut();
     };
@@ -60,6 +73,22 @@ const Sidebar = ({ user, page }) => {
                     </div>
                 </Nav>
             </div>
+            {page.isMobile ? (
+                <Routes>
+                    <Route path='/chats' element={<SidebarList title='Chats' data={chats} />} />
+                    <Route path='/rooms' element={<SidebarList title='Rooms' data={rooms} />} />
+                    <Route path='/users' element={<SidebarList title='Users' data={users} />} />
+                    <Route path='/search' element={<SidebarList title='Search Results' data={searchResults} />} />
+                </Routes>
+            ) : menu === 1 ? (
+                <SidebarList title='Chats' data={chats} />
+            ) : menu === 2 ? (
+                <SidebarList title='Rooms' data={rooms} />
+            ) : menu === 3 ? (
+                <SidebarList title='Users' data={users} />
+            ) : menu === 4 ? (
+                <SidebarList title='Search Results' data={searchResults} />
+            ) : null}
         </div>
     );
 };
