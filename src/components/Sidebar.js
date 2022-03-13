@@ -23,7 +23,7 @@ const Sidebar = ({ user, page }) => {
     const SignOutOnClick = () => {
         auth.signOut();
     };
-
+    //Add new room handling
     const createRoomOnClick = () => {
         const roomName = prompt('Enter the room name');
         if (roomName.trim()) {
@@ -33,6 +33,25 @@ const Sidebar = ({ user, page }) => {
             });
         }
     };
+    //Search users and  rooms handling
+    const searchUsersAndRooms = async event => {
+        event.preventDefault();
+        const query = event.target.elements.search.value;
+        const userSnapshot = await db.collection('users').where('name', '==', query).get();
+        const roomSnapshot = await db.collection('rooms').where('name', '==', query).get();
+        const userResults = userSnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+        const roomResults = roomSnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+        const searchResults = [...userResults, ...roomResults];
+        setMenu(4);
+        setSearchResults(searchResults);
+    };
+
     let Nav;
     if (page.isMobile) {
         Nav = NavLink;
@@ -57,7 +76,7 @@ const Sidebar = ({ user, page }) => {
                 </div>
             </div>
             <div className={styles.sidebar__search}>
-                <form className={styles.sidebar__searchContainer}>
+                <form onSubmit={searchUsersAndRooms} className={styles.sidebar__searchContainer}>
                     <SearchOutlined />
                     <input type='text' id='search' placeholder='Search for users or rooms' />
                 </form>

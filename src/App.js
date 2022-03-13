@@ -1,7 +1,7 @@
 import React ,{useEffect} from 'react';
 import styles from './App.module.css';
 import { auth } from './firebase';
-import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { Route, Routes,  useNavigate } from 'react-router-dom';
 //hooks
 import useWindowSize from './hooks/useWindowSize';
 import useAuthUser from './hooks/useAuthUser';
