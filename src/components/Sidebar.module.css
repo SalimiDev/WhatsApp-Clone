@@ -78,3 +78,42 @@
 .sidebar__searchContainer > input:focus {
   outline: none;
 }
+
+.sidebar__menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ededed;
+  border-right: 1px solid lightgrey;
+}
+
+.sidebar__menu > a,
+.sidebar__menu > div {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding-top: 15px;
+  cursor: pointer;
+}
+
+.sidebar__menu div {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.sidebar__menu div > .MuiSvgIcon-root {
+  fill: #0000008a;
+}
+
+.sidebar__menu div > .sidebar__menuLine {
+  opacity: 0;
+  width: 100%;
+  height: 3px;
+  background: #0000008a;
+  margin-top: 5px;
+}
+
+.sidebar__menu > .sidebar__menuSelected > div > .sidebar__menuLine {
+  opacity: 1;
+}

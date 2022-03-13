@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Sidebar.module.css';
 import { Avatar, IconButton } from '@material-ui/core';
-import { SearchOutlined } from '@material-ui/icons';
+import { SearchOutlined, Home, Message, PeopleAlt } from '@material-ui/icons';
 import { ExitToApp } from '@material-ui/icons';
 import { auth } from '../firebase';
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = ({ user, page }) => {
+    const [menu, setMenu] = useState(1);
     const SignOutOnClick = () => {
         auth.signOut();
     };
+    let Nav;
+    if (page.isMobile) {
+        Nav = NavLink;
+    } else {
+        Nav = props => (
+            <div className={props.activeClass ? styles.sidebar__menuSelected : ''} onClick={props.onClick}>
+                {props.children}
+            </div>
+        );
+    }
     return (
         <div className={styles.sidebar} style={{ minHeight: page.isMobile ? page.height : 'auto' }}>
             <div className={styles.sidebar__header}>
@@ -27,6 +39,26 @@ const Sidebar = ({ user, page }) => {
                     <SearchOutlined />
                     <input type='text' id='search' placeholder='Search for users or rooms' />
                 </form>
+            </div>
+            <div className={styles.sidebar__menu}>
+                <Nav to='/chats' activeClassName='sidebar__menuSelected' onClick={() => setMenu(1)} activeClass={menu === 1}>
+                    <div className={styles.sidebar__menuHome}>
+                        <Home />
+                        <div className={styles.sidebar__menuLine} />
+                    </div>
+                </Nav>
+                <Nav to='/rooms' activeClassName='sidebar__menuSelected' onClick={() => setMenu(2)} activeClass={menu === 2}>
+                    <div className={styles.sidebar__menuRooms}>
+                        <Message />
+                        <div className={styles.sidebar__menuLine} />
+                    </div>
+                </Nav>
+                <Nav to='/users' activeClassName='sidebar__menuSelected' onClick={() => setMenu(3)} activeClass={menu === 3}>
+                    <div className={styles.sidebar__menuUsers}>
+                        <PeopleAlt />
+                        <div className={styles.sidebar__menuLine} />
+                    </div>
+                </Nav>
             </div>
         </div>
     );
