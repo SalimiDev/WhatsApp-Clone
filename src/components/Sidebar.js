@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import styles from './Sidebar.module.css';
 import { Avatar, IconButton } from '@material-ui/core';
-import { SearchOutlined, Home, Message, PeopleAlt } from '@material-ui/icons';
-import { ExitToApp } from '@material-ui/icons';
-import { auth } from '../firebase';
+import { SearchOutlined, ExitToApp, Home, Message, PeopleAlt, Add } from '@material-ui/icons';
+import { auth, createTimestamp, db } from '../firebase';
 import { Routes, Route, NavLink } from 'react-router-dom';
 //Components
 import SidebarList from './SidebarList';
@@ -23,6 +22,16 @@ const Sidebar = ({ user, page }) => {
     //SignOut handling
     const SignOutOnClick = () => {
         auth.signOut();
+    };
+
+    const createRoomOnClick = () => {
+        const roomName = prompt('Enter the room name');
+        if (roomName.trim()) {
+            db.collection('rooms').add({
+                name: roomName,
+                timeStamp: createTimestamp(),
+            });
+        }
     };
     let Nav;
     if (page.isMobile) {
@@ -89,6 +98,11 @@ const Sidebar = ({ user, page }) => {
             ) : menu === 4 ? (
                 <SidebarList title='Search Results' data={searchResults} />
             ) : null}
+            <div className={styles.sidebar__chatAddRoom}>
+                <IconButton onClick={createRoomOnClick}>
+                    <Add />
+                </IconButton>
+            </div>
         </div>
     );
 };
