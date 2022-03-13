@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Sidebar.module.css';
 import { CircularProgress } from '@material-ui/core';
 import { CancelOutlined, SearchOutlined } from '@material-ui/icons';
-
+import SidebarListItem from './SidebarListItem';
 const SidebarList = ({ title, data }) => {
     if (!data) {
         return (
@@ -29,6 +29,9 @@ const SidebarList = ({ title, data }) => {
     return (
         <div className={styles.sidebar__chatContainer}>
             <h2>{title}</h2>
+            {data.map(item => (
+                <SidebarListItem key={item.id} item={item} />
+            ))}
         </div>
     );
 };
