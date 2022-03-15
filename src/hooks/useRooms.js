@@ -3,7 +3,7 @@ import { db } from "../firebase";
 
 export default function useRooms() {
   const [snapshot] = useCollection(
-    db.collection("rooms").orderBy("timestamp", "desc")
+    db.collection("rooms").orderBy("timeStamp", "desc")
   );
 
   const rooms = snapshot?.docs.map((doc) => ({
