@@ -7,6 +7,7 @@ import styles from './Chat.module.css';
 import { Avatar, IconButton } from '@material-ui/core';
 import { AddPhotoAlternate, ArrowBack, MoreVert } from '@material-ui/icons';
 //hooks
+import useChatMessages from '../hooks/useChatMessages';
 import useRoom from '../hooks/useRoom';
 //Firebase
 import { createTimestamp, db, storage } from '../firebase';
@@ -22,8 +23,10 @@ const Chat = ({ user, page }) => {
 
     //hooks & Routes
     const { roomId } = useParams();
+    const messages = useChatMessages(roomId);
     const room = useRoom(roomId, user.uid);
     const navigate = useNavigate();
+    
     //handling the functionality of images preview
     const showPreview = event => {
         const file = event.target.files[0];
