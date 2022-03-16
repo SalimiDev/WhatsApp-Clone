@@ -31,10 +31,13 @@ const ChatFooter = ({ input, onChange, sendMessage, image, user, room, roomId, s
     return (
         <div className={styles.chat__footer}>
             <form>
-                <input placeholder='Type a message' />
+                <input value={input} onChange={!isRecording ? onChange : null} placeholder='Type a message' />
 
                 {canRecord ? (
-                    <button type='submit' className={styles.send__btn}>
+                    <button
+                        type='submit'
+                        className={styles.send__btn}
+                        onClick={input.trim() || (input === '' && image) ? sendMessage : () => false}>
                         {btnIcons}
                     </button>
                 ) : (
