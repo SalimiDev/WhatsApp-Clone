@@ -68,9 +68,9 @@ const Chat = ({ user, page }) => {
                         <MoreVert />
                     </IconButton>
                 </div>
-                <MediaPreview src={src} closePreview={closePreview} />
-                <ChatFooter />
             </div>
+            <MediaPreview src={src} closePreview={closePreview} />
+            <ChatFooter />
         </div>
     );
 };
