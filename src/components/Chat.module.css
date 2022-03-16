@@ -1,0 +1,57 @@
+.chat {
+    opacity: 1;
+    flex: 0.7;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #e5ddd5;
+    transform: translateZ(456px);
+}
+
+.chat__background {
+    background-image: url("https://web.whatsapp.com/img/bg-chat-tile-light_686b98c9fdffef3f63127759e2057750.png");
+    background-size: contain;
+    background-position: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.06;
+}
+
+.chat__header {
+    padding: 10px;
+    padding-right: 0px;
+    padding-left: 12px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid lightgrey;
+    background-color: #ededed;
+    z-index: 1;
+}
+
+.chat__headerInfo {
+    flex: 1;
+    margin-left: 8px;
+}
+
+.chat__headerInfo>h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 3px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 200px;
+}
+
+
+.chat__headerRight {
+    display: flex;
+    justify-content: space-between;
+    min-width: 50px;
+}
