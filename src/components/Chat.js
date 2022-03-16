@@ -8,6 +8,7 @@ import { AddPhotoAlternate, ArrowBack, MoreVert } from '@material-ui/icons';
 import useRoom from '../hooks/useRoom';
 //Components
 import MediaPreview from './MediaPreview';
+import ChatFooter from './ChatFooter';
 
 const Chat = ({ user, page }) => {
     //States
@@ -68,6 +69,7 @@ const Chat = ({ user, page }) => {
                     </IconButton>
                 </div>
                 <MediaPreview src={src} closePreview={closePreview} />
+                <ChatFooter />
             </div>
         </div>
     );
