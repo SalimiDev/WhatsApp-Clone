@@ -12,6 +12,7 @@ import useRoom from '../hooks/useRoom';
 //Firebase
 import { createTimestamp, db, storage } from '../firebase';
 //Components
+import ChatMessages from './ChatMessages';
 import MediaPreview from './MediaPreview';
 import ChatFooter from './ChatFooter';
 
@@ -26,7 +27,7 @@ const Chat = ({ user, page }) => {
     const messages = useChatMessages(roomId);
     const room = useRoom(roomId, user.uid);
     const navigate = useNavigate();
-    
+
     //handling the functionality of images preview
     const showPreview = event => {
         const file = event.target.files[0];
@@ -137,16 +138,14 @@ const Chat = ({ user, page }) => {
                     </IconButton>
                 </div>
             </div>
+
+            <div className={styles.chat__bodyContainer}>
+                <div className={styles.chat__body} style={{ height: page.height - 68 }}>
+                    <ChatMessages messages={messages} user={user} roomId={roomId} />
+                </div>
+            </div>
             <MediaPreview src={src} closePreview={closePreview} />
-            <ChatFooter
-                input={input}
-                onChange={onChange}
-                sendMessage={sendMessage}
-                image={image}
-                user={user}
-                room={room}
-                roomId={roomId}
-               />
+            <ChatFooter input={input} onChange={onChange} sendMessage={sendMessage} image={image} user={user} room={room} roomId={roomId} />
         </div>
     );
 };
