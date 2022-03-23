@@ -57,11 +57,12 @@ const Sidebar = ({ user, page }) => {
         Nav = NavLink;
     } else {
         Nav = props => (
-            <div className={props.activeClass ? styles.sidebar__menuSelected : ''} onClick={props.onClick}>
+            <div className={props.activeclass ? styles.sidebar__menuSelected : ''} onClick={props.onClick}>
                 {props.children}
             </div>
         );
     }
+
     return (
         <div className={styles.sidebar} style={{ minHeight: page.isMobile ? page.height : 'auto' }}>
             <div className={styles.sidebar__header}>
@@ -82,19 +83,19 @@ const Sidebar = ({ user, page }) => {
                 </form>
             </div>
             <div className={styles.sidebar__menu}>
-                <Nav to='/chats' activeClassName='sidebar__menuSelected' onClick={() => setMenu(1)} activeClass={menu === 1}>
+                <Nav to='/chats' className={({isActive})=>isActive? styles.sidebar__menuSelected :""} onClick={() => setMenu(1)} activeclass={menu===1}>
                     <div className={styles.sidebar__menuHome}>
                         <Home />
                         <div className={styles.sidebar__menuLine} />
                     </div>
                 </Nav>
-                <Nav to='/rooms' activeClassName='sidebar__menuSelected' onClick={() => setMenu(2)} activeClass={menu === 2}>
+                <Nav to='/rooms'  className={({isActive})=>isActive? styles.sidebar__menuSelected :""} onClick={() => setMenu(2)} activeclass={menu === 2}>
                     <div className={styles.sidebar__menuRooms}>
                         <Message />
                         <div className={styles.sidebar__menuLine} />
                     </div>
                 </Nav>
-                <Nav to='/users' activeClassName='sidebar__menuSelected' onClick={() => setMenu(3)} activeClass={menu === 3}>
+                <Nav to='/users'className={({isActive})=>isActive? styles.sidebar__menuSelected :""} onClick={() => setMenu(3)} activeclass={menu === 3}>
                     <div className={styles.sidebar__menuUsers}>
                         <PeopleAlt />
                         <div className={styles.sidebar__menuLine} />
