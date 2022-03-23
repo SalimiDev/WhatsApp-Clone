@@ -16,14 +16,14 @@
   background-color: #ededed;
 }
 
-.sidebar__headerLeft {
+.sidebar__header--left {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 68%;
 }
 
-.sidebar__headerLeft h4 {
+.sidebar__header--left h4 {
   margin-left: 10px;
   font-size: 15px;
   font-weight: 500;
@@ -33,11 +33,16 @@
   max-width: 100%;
 }
 
-.sidebar__headerRight {
+.sidebar__header--right {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   max-width: 120px;
+}
+
+.sidebar__header--right>.MuiSvgIcon-root {
+  margin-right: 2vw;
+  font-size: 24px !important;
 }
 
 .sidebar__search {
@@ -48,7 +53,7 @@
   border-right: 1px solid lightgrey;
 }
 
-.sidebar__searchContainer {
+.sidebar__search--container {
   display: flex;
   align-items: center;
   background-color: white;
@@ -60,13 +65,13 @@
   padding-right: 13px;
 }
 
-.sidebar__searchContainer:first-child{
+.sidebar__search--container>.MuiSvgIcon-root {
   color: grey;
   padding: 10px;
   box-sizing: content-box;
 }
 
-.sidebar__searchContainer > input {
+.sidebar__search--container>input {
   font-family: Roboto;
   font-size: 14px;
   font-weight: 400;
@@ -75,7 +80,7 @@
   width: 100%;
 }
 
-.sidebar__searchContainer > input:focus {
+.sidebar__search--container>input:focus {
   outline: none;
 }
 
@@ -87,8 +92,8 @@
   border-right: 1px solid lightgrey;
 }
 
-.sidebar__menu > a,
-.sidebar__menu > div {
+.sidebar__menu>a,
+.sidebar__menu>div {
   flex: 1;
   display: grid;
   place-items: center;
@@ -102,11 +107,11 @@
   place-items: center;
 }
 
-.sidebar__menu div >:first-child {
+.sidebar__menu div>.MuiSvgIcon-root {
   fill: #0000008a;
 }
 
-.sidebar__menu div > .sidebar__menuLine {
+.sidebar__menu div>.sidebar__menu--line {
   opacity: 0;
   width: 100%;
   height: 3px;
@@ -114,11 +119,11 @@
   margin-top: 5px;
 }
 
-.sidebar__menu > .sidebar__menuSelected > div > .sidebar__menuLine {
+.sidebar__menu>.sidebar__menu--selected>div>.sidebar__menu--line {
   opacity: 1;
 }
 
-.sidebar__chatContainer {
+.sidebar__chat--container {
   flex: 1;
   background-color: white;
   overflow: scroll;
@@ -153,7 +158,7 @@
   }
 }
 
-.sidebar__chatAddRoom {
+.sidebar__chat--addRoom {
   width: 50px;
   height: 50px;
   position: absolute;
@@ -167,14 +172,14 @@
   transform: translateZ(456px);
 }
 
-.sidebar__chatAddRoom button {
+.sidebar__chat--addRoom button {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
 
-.sidebar__chatAddRoom .MuiSvgIcon-root {
+.sidebar__chat--addRoom .MuiSvgIcon-root {
   transform: scale(1.3);
   color: white;
 }
@@ -183,7 +188,7 @@
   height: 90px !important;
 }
 
-.scrollFetch > div > .MuiCircularProgress-svg {
+.scrollFetch>div>.MuiCircularProgress-svg {
   transform: scale(1);
 }
 
@@ -196,7 +201,7 @@
   transform: scale(2) !important;
 }
 
-.no_result {
+.no-result {
   width: 100%;
   height: 80%;
   display: flex;
@@ -208,22 +213,22 @@
   padding: 1em;
 }
 
-.no_result > div > .MuiSvgIcon-root:nth-child(1) {
+.no-result>div>.MuiSvgIcon-root:nth-child(1) {
   transform: scale(3);
 }
 
-.cancel_root {
+.cancel-root {
   background-color: #ffffff;
   border-radius: 50%;
   width: 25px;
   height: 25px;
 }
 
-.no_result > div {
+.no-result>div {
   transform: scale(1.8);
 }
 
-.no_result > div > div {
+.no-result>div>div {
   transform: translate(-60%, -90%);
 }
 
@@ -242,12 +247,13 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
 
-.sidebar__chatAddRoom {
+.sidebar__chat--addRoom {
   width: 50px;
   height: 50px;
   position: absolute;
@@ -261,15 +267,14 @@
   transform: translateZ(456px);
 }
 
-.sidebar__chatAddRoom button {
+.sidebar__chat--addRoom button {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
 
-.sidebar__chatAddRoom .MuiSvgIcon-root {
+.sidebar__chat--addRoom .MuiSvgIcon-root {
   transform: scale(1.3);
   color: white;
 }
-

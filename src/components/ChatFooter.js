@@ -3,7 +3,7 @@ import recordAudio from './recordAudio';
 import { v4 as uuid } from 'uuid';
 import { createTimestamp, db, audioStorage } from '../firebase';
 //Styles
-import styles from './ChatFooter.module.css';
+import './ChatFooter.css';
 import { CancelRounded, CheckCircleRounded, MicRounded, Send } from '@material-ui/icons';
 
 const ChatFooter = ({ input, onChange, sendMessage, image, user, room, roomId, setAudioId }) => {
@@ -126,7 +126,7 @@ const ChatFooter = ({ input, onChange, sendMessage, image, user, room, roomId, s
     const canRecord = navigator.mediaDevices.getUserMedia && window.MediaRecorder;
 
     return (
-        <div className={styles.chat__footer}>
+        <div className='chat__footer'>
             <form>
                 <input
                     ref={inputRef}
@@ -139,13 +139,13 @@ const ChatFooter = ({ input, onChange, sendMessage, image, user, room, roomId, s
                 {canRecord ? (
                     <button
                         type='submit'
-                        className={styles.send__btn}
+                        className='send__btn'
                         onClick={input.trim() || (input === '' && image) ? sendMessage : startRecording}>
                         {btnIcons}
                     </button>
                 ) : (
                     <>
-                        <label htmlFor='capture' className={styles.send__btn}>
+                        <label htmlFor='capture' className='send__btn'>
                             {btnIcons}
                         </label>
                         <input style={{ display: 'none' }} type='file' id='capture' accept='audio/*' capture onChange={audioInputChange} />
@@ -154,7 +154,7 @@ const ChatFooter = ({ input, onChange, sendMessage, image, user, room, roomId, s
             </form>
 
             {isRecording && (
-                <div ref={recordingEl} className={styles.record}>
+                <div ref={recordingEl} className='record'>
                     <CancelRounded
                         style={{
                             width: 30,
@@ -164,8 +164,8 @@ const ChatFooter = ({ input, onChange, sendMessage, image, user, room, roomId, s
                         onClick={stopRecording}
                     />
                     <div>
-                        <div className={styles.record__redcircle} />
-                        <div className={styles.record__duration}>{duration}</div>
+                        <div className='record__redcircle' />
+                        <div className='record__duration'>{duration}</div>
                     </div>
                     <CheckCircleRounded
                         style={{

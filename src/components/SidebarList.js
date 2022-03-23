@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './Sidebar.module.css';
+import './SidebarList.css';
 import { CircularProgress } from '@material-ui/core';
 import { CancelOutlined, SearchOutlined } from '@material-ui/icons';
 import SidebarListItem from './SidebarListItem';
 const SidebarList = ({ title, data }) => {
     if (!data) {
         return (
-            <div className={`${styles.loader__container} ${styles.sidebarLoader}`}>
+            <div className='loader__container sidebar__loader'>
                 <CircularProgress />
             </div>
         );
@@ -14,10 +14,10 @@ const SidebarList = ({ title, data }) => {
 
     if (!data.length && title === 'Search Results') {
         return (
-            <div className={styles.no_result}>
+            <div className='no-result'>
                 <div>
                     <SearchOutlined />
-                    <div className={styles.cancel_root}>
+                    <div className='cancel-root'>
                         <CancelOutlined />
                     </div>
                 </div>
@@ -27,7 +27,7 @@ const SidebarList = ({ title, data }) => {
     }
 
     return (
-        <div className={styles.sidebar__chatContainer}>
+        <div className='sidebar__chat--container'>
             <h2>{title}</h2>
             {data.map(item => (
                 <SidebarListItem key={item.id} item={item} />

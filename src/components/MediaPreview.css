@@ -51,6 +51,7 @@
   from {
     transform: translateX(-50%) translateY(calc(-50% - 24px)) scale(0.8);
   }
+
   to {
     transform: translateX(-50%) translateY(calc(-50% - 24px)) scale(1);
   }

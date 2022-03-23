@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import Compressor from 'compressorjs';
 //Styles
-import styles from './Chat.module.css';
+import './Chat.css';
 import { Avatar, IconButton } from '@material-ui/core';
 import { AddPhotoAlternate, ArrowBack, MoreVert } from '@material-ui/icons';
 //hooks
@@ -108,25 +108,25 @@ const Chat = ({ user, page }) => {
     };
 
     return (
-        <div className={styles.chat}>
-            <div style={{ height: page.height }} className={styles.chat__background} />
+        <div className='chat'>
+            <div style={{ height: page.height }} className='chat__background' />
 
-            <div className={styles.chat__header}>
+            <div className='chat__header'>
                 {page.isMobile && (
                     <IconButton onClick={navigate(-1)}>
                         <ArrowBack />
                     </IconButton>
                 )}
 
-                <div className={styles.avatar__container}>
+                <div className='avatar__container'>
                     <Avatar src={room?.photoURL} />
                 </div>
 
-                <div className={styles.chat__headerInfo}>
+                <div className='chat__header--info'>
                     <h3 style={{ width: page.isMobile && page.width - 165 }}>{room?.name}</h3>
                 </div>
 
-                <div className={styles.chat__headerRight}>
+                <div className='chat__header--right'>
                     <input id='image' style={{ display: 'none' }} accept='image/*' type='file' onChange={showPreview} />
                     <IconButton>
                         <label style={{ cursor: 'pointer', height: 24 }} htmlFor='image'>
@@ -139,8 +139,8 @@ const Chat = ({ user, page }) => {
                 </div>
             </div>
 
-            <div className={styles.chat__bodyContainer}>
-                <div className={styles.chat__body} style={{ height: page.height - 68 }}>
+            <div className='chat__body--container'>
+                <div className='chat__body' style={{ height: page.height - 68 }}>
                     <ChatMessages messages={messages} user={user} roomId={roomId} />
                 </div>
             </div>

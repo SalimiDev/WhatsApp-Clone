@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Sidebar.module.css';
+import  './Sidebar.css';
 import { Avatar, IconButton } from '@material-ui/core';
 import { SearchOutlined, ExitToApp, Home, Message, PeopleAlt, Add } from '@material-ui/icons';
 import { auth, createTimestamp, db } from '../firebase';
@@ -57,48 +57,48 @@ const Sidebar = ({ user, page }) => {
         Nav = NavLink;
     } else {
         Nav = props => (
-            <div className={props.activeclass ? styles.sidebar__menuSelected : ''} onClick={props.onClick}>
+            <div className={props.activeclass ? 'sidebar__menu--selected' : ''} onClick={props.onClick}>
                 {props.children}
             </div>
         );
     }
 
     return (
-        <div className={styles.sidebar} style={{ minHeight: page.isMobile ? page.height : 'auto' }}>
-            <div className={styles.sidebar__header}>
-                <div className={styles.sidebar__headerLeft}>
+        <div className='sidebar' style={{ minHeight: page.isMobile ? page.height : 'auto' }}>
+            <div className='sidebar__header'>
+                <div className='sidebar__header--left'>
                     <Avatar src={user?.photoURL} />
                     <h4>{user?.displayName}</h4>
                 </div>
-                <div className={styles.sidebar__headerRight}>
+                <div className='sidebar__header--right'>
                     <IconButton onClick={SignOutOnClick}>
                         <ExitToApp />
                     </IconButton>
                 </div>
             </div>
-            <div className={styles.sidebar__search}>
-                <form onSubmit={searchUsersAndRooms} className={styles.sidebar__searchContainer}>
+            <div className='sidebar__search'>
+                <form onSubmit={searchUsersAndRooms} className='sidebar__search--container'>
                     <SearchOutlined />
                     <input type='text' id='search' placeholder='Search for users or rooms' />
                 </form>
             </div>
-            <div className={styles.sidebar__menu}>
-                <Nav to='/chats' className={({isActive})=>isActive? styles.sidebar__menuSelected :""} onClick={() => setMenu(1)} activeclass={menu===1}>
-                    <div className={styles.sidebar__menuHome}>
+            <div className='sidebar__menu'>
+                <Nav to='/chats' className={({isActive})=>isActive? 'sidebar__menu--selected' :""} onClick={() => setMenu(1)} activeclass={menu===1}>
+                    <div className='sidebar__menu--home'>
                         <Home />
-                        <div className={styles.sidebar__menuLine} />
+                        <div className='sidebar__menu--line' />
                     </div>
                 </Nav>
-                <Nav to='/rooms'  className={({isActive})=>isActive? styles.sidebar__menuSelected :""} onClick={() => setMenu(2)} activeclass={menu === 2}>
-                    <div className={styles.sidebar__menuRooms}>
+                <Nav to='/rooms'  className={({isActive})=>isActive? 'sidebar__menu--selected' :""} onClick={() => setMenu(2)} activeclass={menu === 2}>
+                    <div className='sidebar__menu--rooms'>
                         <Message />
-                        <div className={styles.sidebar__menuLine} />
+                        <div className='sidebar__menu--line' />
                     </div>
                 </Nav>
-                <Nav to='/users'className={({isActive})=>isActive? styles.sidebar__menuSelected :""} onClick={() => setMenu(3)} activeclass={menu === 3}>
-                    <div className={styles.sidebar__menuUsers}>
+                <Nav to='/users'className={({isActive})=>isActive? 'sidebar__menu--selected' :""} onClick={() => setMenu(3)} activeclass={menu === 3}>
+                    <div className='sidebar__menu--users'>
                         <PeopleAlt />
-                        <div className={styles.sidebar__menuLine} />
+                        <div className='sidebar__menu--line' />
                     </div>
                 </Nav>
             </div>
@@ -118,7 +118,7 @@ const Sidebar = ({ user, page }) => {
             ) : menu === 4 ? (
                 <SidebarList title='Search Results' data={searchResults} />
             ) : null}
-            <div className={styles.sidebar__chatAddRoom}>
+            <div className='sidebar__chat--addRoom'>
                 <IconButton onClick={createRoomOnClick}>
                     <Add />
                 </IconButton>

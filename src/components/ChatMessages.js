@@ -1,5 +1,4 @@
 import { CircularProgress } from '@material-ui/core';
-import styles from './ChatMessages.module.css';
 import AudioPlayer from './AudioPlayer';
 
 const ChatMessages = ({ messages, user, roomId }) => {
@@ -8,12 +7,12 @@ const ChatMessages = ({ messages, user, roomId }) => {
         const isSender = message.uid === user.uid;
 
         return (
-            <div key={message.id} className={`${styles.chat__message} ${isSender ? styles.chat__messageSender : ''}`}>
-                <span className={styles.chat__name}>{message.name}</span>
+            <div key={message.id} className={`chat__message ${isSender ? 'chat__message--sender' : ''}`}>
+                <span className='chat__name'>{message.name}</span>
 
                 {message.imageUrl === 'uploading' ? (
-                    <div className={styles.imageContainer}>
-                        <div className={styles.image__containerLoader}>
+                    <div className='image--container'>
+                        <div className='image__container--loader'>
                             <CircularProgress
                                 style={{
                                     width: 40,
@@ -23,21 +22,16 @@ const ChatMessages = ({ messages, user, roomId }) => {
                         </div>
                     </div>
                 ) : message.imageUrl ? (
-                    <div className={styles.imageContainer}>
+                    <div className='image--container'>
                         <img src={message.imageUrl} alt={message.name} />
                     </div>
                 ) : null}
 
-                <span className={styles.chat__timestamp}>{message.time}</span>
+                <span className='chat__timestamp'>{message.time}</span>
                 {message.audioName ? (
-                    <AudioPlayer
-                        sender={isSender}
-                        roomId={roomId}
-                        id={message.id}
-                        audioUrl={message.audioUrl}
-                    />
+                    <AudioPlayer sender={isSender} roomId={roomId} id={message.id} audioUrl={message.audioUrl} />
                 ) : (
-                    <span className={styles.chat__messageMessage}>{message.message}</span>
+                    <span className='chat__message--message'>{message.message}</span>
                 )}
             </div>
         );
