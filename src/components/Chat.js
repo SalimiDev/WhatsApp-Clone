@@ -21,6 +21,7 @@ const Chat = ({ user, page }) => {
     const [image, setImage] = useState(null);
     const [src, setSrc] = useState('');
     const [input, setInput] = useState('');
+    const [audioId, setAudioId] = useState('');
 
     //hooks & Routes
     const { roomId } = useParams();
@@ -141,11 +142,25 @@ const Chat = ({ user, page }) => {
 
             <div className='chat__body--container'>
                 <div className='chat__body' style={{ height: page.height - 68 }}>
-                    <ChatMessages messages={messages} user={user} roomId={roomId} />
+                    <ChatMessages
+                        messages={messages}
+                        user={user}
+                        roomId={roomId}
+                        audioId={audioId}
+                        setAudioId={setAudioId}
+                    />
                 </div>
             </div>
             <MediaPreview src={src} closePreview={closePreview} />
-            <ChatFooter input={input} onChange={onChange} sendMessage={sendMessage} image={image} user={user} room={room} roomId={roomId} />
+            <ChatFooter
+                input={input}
+                onChange={onChange}
+                sendMessage={sendMessage}
+                image={image}
+                user={user}
+                room={room}
+                roomId={roomId}
+            />
         </div>
     );
 };
