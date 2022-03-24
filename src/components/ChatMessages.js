@@ -1,7 +1,7 @@
 import { CircularProgress } from '@material-ui/core';
 import AudioPlayer from './AudioPlayer';
 
-const ChatMessages = ({ messages, user, roomId }) => {
+const ChatMessages = ({ messages, user, roomId, audioId, setAudioId }) => {
     if (!messages) return null;
     return messages.map(message => {
         const isSender = message.uid === user.uid;
@@ -29,7 +29,14 @@ const ChatMessages = ({ messages, user, roomId }) => {
 
                 <span className='chat__timestamp'>{message.time}</span>
                 {message.audioName ? (
-                    <AudioPlayer sender={isSender} roomId={roomId} id={message.id} audioUrl={message.audioUrl} />
+                    <AudioPlayer
+                        sender={isSender}
+                        roomId={roomId}
+                        id={message.id}
+                        audioUrl={message.audioUrl}
+                        audioId={audioId}
+                        setAudioId={setAudioId}
+                    />
                 ) : (
                     <span className='chat__message--message'>{message.message}</span>
                 )}
