@@ -1,6 +1,7 @@
 import React from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { PauseRounded, PlayArrowRounded } from '@material-ui/icons';
+import './AudioPlayer.css';
 
 const AudioPlayer = ({ sender, audioUrl, id, setAudioId, audioId }) => {
     const [isPlaying, setPlaying] = React.useState(false);
