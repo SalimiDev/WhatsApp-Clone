@@ -4,13 +4,13 @@ import { v4 as uuid } from 'uuid';
 import Compressor from 'compressorjs';
 //Styles
 import './Chat.css';
-import { Avatar, IconButton } from '@material-ui/core';
+import { Avatar, IconButton, CircularProgress, Menu, MenuItem } from '@material-ui/core';
 import { AddPhotoAlternate, ArrowBack, MoreVert } from '@material-ui/icons';
 //hooks
 import useChatMessages from '../hooks/useChatMessages';
 import useRoom from '../hooks/useRoom';
 //Firebase
-import { createTimestamp, db, storage } from '../firebase';
+import { createTimestamp, db, storage, audioStorage } from '../firebase';
 //Components
 import ChatMessages from './ChatMessages';
 import MediaPreview from './MediaPreview';
@@ -22,6 +22,8 @@ const Chat = ({ user, page }) => {
     const [src, setSrc] = useState('');
     const [input, setInput] = useState('');
     const [audioId, setAudioId] = useState('');
+    const [isDeleting, setDeleting] = useState(false);
+    const [openMenu, setOpenMenu] = useState(null);
 
     //hooks & Routes
     const { roomId } = useParams();
@@ -108,6 +110,39 @@ const Chat = ({ user, page }) => {
         }
     };
 
+    //handle to deleting rooms
+    async function deleteRoom() {
+        setOpenMenu(false);
+        setDeleting(true);
+
+        try {
+            const roomRef = db.collection('rooms').doc(roomId);
+            const roomMessages = await roomRef.collection('messages').get();
+            const audioFiles = [];
+            const imageFiles = [];
+            roomMessages.docs.forEach(doc => {
+                if (doc.data().audioName) {
+                    audioFiles.push(doc.data().audioName);
+                } else if (doc.data().imageName) {
+                    imageFiles.push(doc.data().imageName);
+                }
+            });
+
+            await Promise.all([
+                ...roomMessages.docs.map(doc => doc.ref.delete()),
+                ...imageFiles.map(image => storage.child(image).delete()),
+                ...audioFiles.map(audio => audioStorage.child(audio).delete()),
+                db.collection('users').doc(user.uid).collection('chats').doc(roomId).delete(),
+                roomRef.delete(),
+            ]);
+        } catch (error) {
+            console.error('Error deleting room: ', error.message);
+        } finally {
+            setDeleting(false);
+            page.isMobile ? navigate(-1) : navigate('/chats');
+        }
+    }
+
     return (
         <div className='chat'>
             <div style={{ height: page.height }} className='chat__background' />
@@ -134,9 +169,17 @@ const Chat = ({ user, page }) => {
                             <AddPhotoAlternate />
                         </label>
                     </IconButton>
-                    <IconButton>
+                    <IconButton onClick={event => setOpenMenu(event.currentTarget)}>
                         <MoreVert />
                     </IconButton>
+                    <Menu
+                        id='menu'
+                        anchorEl={openMenu}
+                        open={Boolean(openMenu)}
+                        onClose={() => setOpenMenu(null)}
+                        keepMounted>
+                        <MenuItem onClick={deleteRoom}>Delete Room</MenuItem>
+                    </Menu>
                 </div>
             </div>
 
@@ -161,6 +204,11 @@ const Chat = ({ user, page }) => {
                 room={room}
                 roomId={roomId}
             />
+            {isDeleting && (
+                <div className='chat__deleting'>
+                    <CircularProgress />
+                </div>
+            )}
         </div>
     );
 };
