@@ -91,7 +91,6 @@
 }
 
 .chat__body--container {
-  /* flex: 1; */
   background-repeat: repeat;
   background-position: center;
   overflow: scroll;
@@ -102,8 +101,6 @@
 }
 
 .chat__body {
-  /* opacity: 0; */
-  /* background-color: transparent; */
   padding: 0px 60px;
   padding-bottom: 98px !important;
   transition: opacity 200ms;
@@ -122,10 +119,11 @@
 
 .paginateLoader>div>.MuiCircularProgress-svg {
   transform: scale(1);
-  /*display: none;*/
 }
 
 .chat__message {
+  display: flex;
+  flex-direction: column;
   z-index: 0;
   position: relative;
   font-size: 16px;
@@ -172,12 +170,7 @@
 }
 
 .image-container img {
-  /*object-fit: cover;*/
   width: 100%;
-  /* position: absolute; */
-  /* left: 50%; */
-  /* top: 50%; */
-  /* transform: translateX(-50%) translateY(-50%); */
 }
 
 .chat__message img {

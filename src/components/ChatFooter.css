@@ -68,7 +68,6 @@
   font-family: Roboto, sans-serif;
   transition: all 300ms;
   width: calc(100% - 112px);
-  /*112px 56px*/
   position: relative;
 }
 
